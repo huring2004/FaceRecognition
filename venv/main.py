@@ -26,6 +26,7 @@ encodeListWithIds = pickle.load(file)
 encodeListKnown, studentIds = encodeListWithIds
 file.close()
 # print(encodeListKnown)
+print(studentIds)
 # xong...
 
 
@@ -39,7 +40,8 @@ while True:
     encodeCurFrame = face_recognition.face_encodings(imgS,faceCurFrame)
 
     imgBackground[162: 162 + 480, 55 : 55 + 640] = frame
-    imgBackground[44: 44+ 633, 808 : 808 + 414] = imgModeList[3]
+    imgBackground[44: 44+ 633, 808 : 808 + 414] = imgModeList[0]
+
 
     for enFace, faceloc in zip(encodeCurFrame, faceCurFrame):
         matches = face_recognition.compare_faces(encodeListKnown,enFace)
@@ -51,6 +53,8 @@ while True:
             y1,x2,y2,x1 = y1*4, x2*4, y2*4,x1 *4
             bbox = 55 + x1, 162 + y1,x2 - x1, y2 - y1
             imgBackground = cvzone.cornerRect(imgBackground, bbox, rt = 0)
+
+
     cv2.imshow("Cam:", imgBackground)
     if(cv2.waitKey(1)  == ord(" ")) :break
 

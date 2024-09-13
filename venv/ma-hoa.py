@@ -1,23 +1,11 @@
-from fileinput import filename
 
 import cv2
 import face_recognition
 import pickle
 import os
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import db
-from firebase_admin import storage
-from firebase_admin.storage import bucket
-
-cred = credentials.Certificate("../serviceAccountKey.json") #json
-firebase_admin.initialize_app(cred, {
-    'databaseURL': "https://test-data-base-da118-default-rtdb.asia-southeast1.firebasedatabase.app/",
-    'storageBucket': "test-data-base-da118.appspot.com" # ket noi voi storage của fibase
-})
 
 # importing student images
-folderPath = "../image"
+folderPath = "../image/"
 modePath = os.listdir(folderPath)
 imgList = []
 stIds = []
@@ -27,9 +15,7 @@ for path in modePath:
     stIds.append(os.path.splitext(path)[0])
 
     fileName = os.path.join(folderPath,path)
-    bucket = storage.bucket()
-    blob = bucket.blob(fileName)
-    blob.upload_from_filename(fileName)
+
 
 # print(stIds)
 
